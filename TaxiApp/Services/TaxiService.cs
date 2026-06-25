@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TaxiApp.Exceptions;
+using TaxiApp.Fakes;
 using TaxiApp.Models;
 
 namespace TaxiApp.Services
@@ -10,7 +11,9 @@ namespace TaxiApp.Services
         private readonly IDriveService _driveService;
         private readonly IZoneService _zoneService;
         private readonly IDriverService _driverService;
-
+        private FakeZoneService zoneService;
+        private FakeDriveService driveService;
+        private FakeDriverService driverService;
 
         public TaxiService(IZoneService zoneService, IDriveService driveService, IDriverService driverService)
         {
@@ -19,9 +22,11 @@ namespace TaxiApp.Services
             _driverService = driverService;
         }
 
-        public TaxiService()
+        public TaxiService(FakeZoneService zoneService, FakeDriveService driveService, FakeDriverService driverService)
         {
-
+            this.zoneService = zoneService;
+            this.driveService = driveService;
+            this.driverService = driverService;
         }
 
         public void AssignDrive(Address from, Address to, DateTime time)
